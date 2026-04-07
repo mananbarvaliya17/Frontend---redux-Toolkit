@@ -538,9 +538,97 @@ input {
 .pagination-bar {
   margin: 1rem 0 2rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.6rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  animation: paginationSlideUp 0.35s ease;
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pagination-number {
+  min-width: 36px;
+  height: 36px;
+  border: 1px solid #c9d4e8;
+  border-radius: 9px;
+  background: #fff;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  animation: paginationButtonIn 0.28s ease;
+}
+
+.pagination-number:hover {
+  border-color: #8fb2ff;
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.pagination-number.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(29, 78, 216, 0.25);
+}
+
+.pagination-number:active {
+  transform: scale(0.95);
+}
+
+.pagination-dots {
+  color: var(--muted);
+  font-weight: 600;
+  padding: 0 0.2rem;
+}
+
+@keyframes paginationSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes paginationButtonIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.app-footer {
+  max-width: 1220px;
+  margin: 1.5rem auto 0;
+  padding: 1rem 1.25rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.app-footer-text {
+  color: var(--muted);
+  font-size: 0.92rem;
 }
 
 .loading {
@@ -584,6 +672,11 @@ input {
     padding: 0.9rem;
   }
 
+  .app-footer {
+    margin-top: 1rem;
+    padding: 0.85rem 0.9rem;
+  }
+
   .search-form {
     flex-direction: column;
   }
@@ -595,6 +688,16 @@ input {
 
   .collection-header {
     align-items: flex-start;
+  }
+
+  .pagination-bar {
+    padding: 0.65rem;
+    gap: 0.5rem;
+  }
+
+  .pagination-number {
+    min-width: 34px;
+    height: 34px;
   }
 
   .collection-card-overlay {

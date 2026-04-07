@@ -3,7 +3,7 @@ import axios from "axios";
 const unsplashKey = import.meta.env.VITE_UNSPLASH_KEY;
 const pexelsKey = import.meta.env.VITE_PEXELS_KEY;
 
-export async function fetchPhotos(query, page = 1, per_page = 25) {
+export async function fetchPhotos(query, page = 1, per_page = 30) {
    try {
       if (!unsplashKey) {
          throw new Error('Missing Unsplash API key');
@@ -27,7 +27,7 @@ export async function fetchPhotos(query, page = 1, per_page = 25) {
    }
 }
 
-export async function FetchVideos(query, per_page = 12) {
+export async function FetchVideos(query, per_page = 32) {
    try {
       if (!pexelsKey) {
          throw new Error('Missing Pexels API key');

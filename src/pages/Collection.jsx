@@ -14,6 +14,22 @@ const Collection = () => {
 
   const totalPages = Math.max(1, Math.ceil(collectionValue.length / PAGE_SIZE))
 
+  const getVisiblePages = () => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1)
+    }
+
+    if (page <= 4) {
+      return [1, 2, 3, 4, 5, '...', totalPages]
+    }
+
+    if (page >= totalPages - 3) {
+      return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages]
+    }
+
+    return [1, '...', page - 1, page, page + 1, '...', totalPages]
+  }
+
   useEffect(() => {
     setPage((prev) => Math.min(prev, totalPages))
   }, [totalPages])
@@ -66,9 +82,28 @@ const Collection = () => {
                 >
                   Prev
                 </button>
-                <span className="pagination-info">
-                  Page {page} of {totalPages}
-                </span>
+                <div className="pagination-pages">
+                  {getVisiblePages().map((value, idx) => {
+                    if (value === '...') {
+                      return (
+                        <span key={`dots-${idx}`} className="pagination-dots">
+                          ...
+                        </span>
+                      )
+                    }
+
+                    return (
+                      <button
+                        key={value}
+                        className={`pagination-number ${page === value ? 'active' : ''}`}
+                        onClick={() => setPage(value)}
+                        aria-label={`Go to page ${value}`}
+                      >
+                        {value}
+                      </button>
+                    )
+                  })}
+                </div>
                 <button
                   className="btn btn-primary"
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
